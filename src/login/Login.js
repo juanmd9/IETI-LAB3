@@ -51,13 +51,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function createUser() {
-  localStorage.clear();
+  // localStorage.clear();
   localStorage.setItem("email", "juan");
   localStorage.setItem("password", "123");
-  localStorage.setItem("isLoggedIn", false);
+  // localStorage.setItem("isLoggedIn", false);
 }
 
 export default function Login({setIsLoggedIn}) {
+  function loginFailed() {
+    alert("Login Failed! +++ ");
+
+  }
+  function loginSuccess(e) {
+    alert("Login Success! +++");
+  }
   function handleSubmit(e) {
     const formData = new FormData(e.target);
     const user = {};
@@ -75,12 +82,12 @@ export default function Login({setIsLoggedIn}) {
       user.password === userInput.password
     ) {
       localStorage.setItem("isLoggedIn", true);
-      // success();
       setIsLoggedIn(true);
+      loginSuccess();
     } else {
       localStorage.setItem("isLoggedIn", false);
-      // failed();
       setIsLoggedIn(false);
+      loginFailed();
     }
     console.log(JSON.parse(localStorage.getItem("isLoggedIn")));
   }
