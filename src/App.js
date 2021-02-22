@@ -5,13 +5,34 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-d
 import React, { useState } from 'react';
 import useIsLoggedIn from './login/useIsLoggedIn';
 import PersistentDrawerLeft from './navigation/PersistentDrawerLeft'
-
+import SimpleCard from './card/SimpleCard'
 
 
 function App() {
   // const LoginView = () => <Login success={loginSuccess} failed={loginFailed} />;
+  const prueba = {
+    "description": "some description text ",
+    "responsible": {
+        "name": "Santiago Carrillo",
+        "email": "sancarbar@gmail"
+    },
+    "status": "ready",
+    "dueDate": 156464645646
+  };
+  const TodoAppView = () => <SimpleCard prueba={prueba}/>;
 
-  const TodoAppView = () => <h1>Inicio</h1>;
+  const router = () => (
+    <Router>
+        <Route exact path="/">
+          {isLoggedIn ? <Redirect to="/todo" /> : <Login setIsLoggedIn={setIsLoggedIn} />}
+        </Route>
+        <Switch>
+        <Route path="/todo">
+          {TodoAppView}
+        </Route>
+        </Switch>
+      </Router>
+  );
 
   const { isLoggedIn, setIsLoggedIn } = useIsLoggedIn();
 
@@ -22,17 +43,8 @@ function App() {
   
   return (
     <div className="wrapper">
-      <PersistentDrawerLeft/>
-      <Router>
-        <Route exact path="/">
-          {isLoggedIn ? <Redirect to="/todo" /> : <Login setIsLoggedIn={setIsLoggedIn} />}
-        </Route>
-        <Switch>
-        <Route path="/todo">
-          {TodoAppView}
-        </Route>
-        </Switch>
-      </Router>
+      <PersistentDrawerLeft prueba={router}/>
+      
     </div>
   );
 }
