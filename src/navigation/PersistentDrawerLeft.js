@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
   fab: {
     position: 'absolute',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
+    bottom: theme.spacing(3),
+    right: theme.spacing(6),
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -182,8 +182,8 @@ export default function PersistentDrawerLeft({ prueba }) {
           <div className={classes.drawerHeader} />
           {prueba()}
           <Fab color="primary" aria-label="add" className={classes.fab}>
-        <AddIcon />
-      </Fab>
+            <AddIcon />
+          </Fab>
         </main>
       </ThemeProvider>
     </div>
@@ -194,6 +194,6 @@ PersistentDrawerLeft.propTypes = {
   prueba: PropTypes.func.isRequired
 }
 
-function out(){
+function out() {
   console.log("Logout");
 }
